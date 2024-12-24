@@ -9,7 +9,7 @@ on:
       - main
 
 jobs:
-  build-java:
+  build-jar-package:
     runs-on: ubuntu-latest
 
     steps:
@@ -44,7 +44,7 @@ jobs:
 
   dockerize:
     runs-on: ubuntu-latest
-    needs: build-java
+    needs: build-jar-package
 
     steps:
     # 下载之前的 artifacts
@@ -88,4 +88,4 @@ jobs:
         name: docker-image-and-run-command
         path: |
           erce.tar
-          # docker-run-command.txt
+#          docker-run-command.txt
