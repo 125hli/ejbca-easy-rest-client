@@ -58,13 +58,12 @@ jobs:
     - name: Extract artifacts
       run: 
         mkdir -p ./app &&
-        tar --strip-components=1 -xzvf ./build/build.tar.gz -C ./app && ls -al ./app
+        tar -xzvf ./build/build.tar.gz -C ./app
 
     # 创建最小化 Dockerfile
-    - name: Create Dockerfile with Ubuntu Base
+    - name: Create Dockerfile with eclipse-temurin:17-jre-alpine
       run: |
-        echo 'FROM ubuntu:20.04' > Dockerfile
-        echo 'RUN apt-get update && apt-get install -y openjdk-17-jre iputils-ping && apt-get clean' >> Dockerfile
+        echo 'FROM eclipse-temurin:17-jre-alpine' >> Dockerfile
         echo 'WORKDIR /app' >> Dockerfile
         echo 'COPY app/ /app' >> Dockerfile
 
