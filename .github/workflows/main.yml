@@ -64,9 +64,9 @@ jobs:
     - name: Create Dockerfile with Ubuntu Base
       run: |
         echo 'FROM ubuntu:20.04' > Dockerfile
-        echo 'RUN apt-get update && apt-get install -y openjdk-17-jre iputils-ping && rm -rf /var/lib/apt/lists/*' >> Dockerfile
+        echo 'RUN apt-get update && apt-get install -y openjdk-17-jre iputils-ping && apt-get clean' >> Dockerfile
         echo 'WORKDIR /app' >> Dockerfile
-        echo 'COPY app/* .' >> Dockerfile
+        echo 'COPY app/ /app' >> Dockerfile
 
     # 构建最小化 Docker 镜像
     - name: Build Minimal Docker Image
