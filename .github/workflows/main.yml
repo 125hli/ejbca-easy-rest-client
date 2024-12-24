@@ -57,7 +57,7 @@ jobs:
     # 解压 artifacts
     - name: Extract artifacts
       run: 
-        mkdir -p ./app
+        mkdir -p ./app &&
         tar -xzvf ./build/build.tar.gz -C ./app
 
     # 创建最小化 Dockerfile
