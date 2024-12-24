@@ -58,15 +58,15 @@ jobs:
     - name: Extract artifacts
       run: 
         mkdir -p ./app &&
-        tar -xzvf ./build/build.tar.gz -C ./app
+        tar --strip-components=1 -xzvf ./build/build.tar.gz -C ./app
 
     # 创建最小化 Dockerfile
     - name: Create Minimal Dockerfile
       run: |
         echo 'FROM eclipse-temurin:17-jre-alpine AS runtime' > Dockerfile
         echo 'WORKDIR /app' >> Dockerfile
-        echo "RUN ls -al /app"
-        echo 'CMD ["java", "-jar", "/app/build/erce-1.3.0.jar"]' >> Dockerfile
+        echo 'COPY app/* .' >> Dockerfile
+        echo 'CMD ["java", "-jar", "/app/erce-1.3.0.jar"]' >> Dockerfile
 
     # 构建最小化 Docker 镜像
     - name: Build Minimal Docker Image
